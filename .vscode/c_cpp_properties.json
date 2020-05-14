@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${env:HONE}/.arduino15/packages/Seeeduino/tools/arm-none-eabi-gcc/7-2017q4/arm-none-eabi/include",
+                "${env:HOME}/.arduino15/packages/Seeeduino/tools/CMSIS/**",
+                "${env:HOME}/.arduino15/packages/Seeeduino/tools/CMSIS-Atmel/**",
+                "${env:HOME}/.arduino15/packages/Seeeduino/hardware/samd/1.7.5/variants/wio_terminal",
+                "${env:HOME}/.arduino15/packages/Seeeduino/hardware/samd/1.7.5/**",
+                "${env:HOME}/.arduino15/libraries/**"
+
+            ],
+            "forcedInclude": [
+                "${env:HOME}/.arduino15/packages/Seeeduino/hardware/samd/1.7.5/cores/arduino/Arduino.h"
+            ],
+            "defines": [],
+            "compilerPath": ".arduino15/packages/Seeeduino/tools/arm-none-eabi-gcc/7-2017q4/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,41 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.elf",
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": true,
+            "targetArchitecture": "arm",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "gdb の再フォーマットを有効にする",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "load symbols",
+                    "text": "symbol-file ${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.elf"
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "localhost:3333",
+            "miDebuggerArgs": "",
+            "debugServerPath": "${env:HOME}/openocd/bin/openocd",
+            "debugServerArgs": "-s ${env:HOME}/openocd/share/openocd/scripts -f ${workspaceFolder}/openocd.tcl -c \"flash_bin ${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.bin\" -c \"echo {gdb server started}\"",
+            "serverStarted": "gdb server started",
+            "filterStderr": true,
+            "filterStdout": false,
+            "logging": {
+                "engineLogging": true
+            },
+            "preLaunchTask": "build"
+        }
+    ]
+}
