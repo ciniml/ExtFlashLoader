@@ -8,7 +8,7 @@
             "name": "(gdb) launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.elf",
+            "program": "${workspaceFolder}/sd_updater.Seeeduino.samd.seeed_wio_terminal.elf",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": true,
             "targetArchitecture": "arm",
@@ -21,14 +21,14 @@
                 },
                 {
                     "description": "load symbols",
-                    "text": "symbol-file ${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.elf"
+                    "text": "symbol-file ${workspaceFolder}/sd_updater.Seeeduino.samd.seeed_wio_terminal.elf"
                 }
             ],
             "miDebuggerPath": "/usr/bin/gdb-multiarch",
             "miDebuggerServerAddress": "localhost:3333",
             "miDebuggerArgs": "",
             "debugServerPath": "${env:HOME}/openocd/bin/openocd",
-            "debugServerArgs": "-s ${env:HOME}/openocd/share/openocd/scripts -f ${workspaceFolder}/openocd.tcl -c \"flash_bin ${workspaceFolder}/flash_access.Seeeduino.samd.seeed_wio_terminal.bin\" -c \"echo {gdb server started}\"",
+            "debugServerArgs": "-s ${env:HOME}/openocd/share/openocd/scripts -f ${workspaceFolder}/openocd.tcl -c \"flash_bin ${workspaceFolder}/sd_updater.Seeeduino.samd.seeed_wio_terminal.bin\" -c \"echo {gdb server started}\"",
             "serverStarted": "gdb server started",
             "filterStderr": true,
             "filterStdout": false,
