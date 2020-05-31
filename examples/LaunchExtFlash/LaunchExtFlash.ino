@@ -3,8 +3,6 @@
 #include <ExtFlashLoader.h>
 
 TFT_eSPI tft;
-ExtFlashLoader::QSPIFlash qspiFlash;
-ExtFlashLoader::SerialDownloader downloader(qspiFlash);
 
 void setup() {
     tft.begin();
