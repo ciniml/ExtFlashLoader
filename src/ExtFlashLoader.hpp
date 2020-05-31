@@ -2,10 +2,14 @@
 // Copyright 2020 Kenta IDA
 #ifndef EXTFLASHLOADER_HPP__
 #define EXTFLASHLOADER_HPP__
+
+#undef min 
 #include <cstdint>
+#include <functional>
 
 #include "sam.h"
 #include "variant.h"
+
 
 namespace ExtFlashLoader
 {
@@ -355,6 +359,61 @@ namespace ExtFlashLoader
             runQSPIApplication(this->qspi, QspiBaseAddress);
         }
     };
+
+    typedef std::function<bool (std::size_t bytesWritten, std::size_t bytesTotal, bool verifying)> WriteExternalCallback;
+    static bool writeExternalFlash(QSPIFlash& qspi, std::uintptr_t address, const void* data, std::size_t length, WriteExternalCallback&& callback ) {
+        constexpr std::size_t PageSize = 256;
+        constexpr std::size_t SectorSize = 4096;
+        constexpr std::size_t SectorSizeMask = SectorSize - 1;
+        auto data_ptr = reinterpret_cast<const std::uint8_t*>(data);
+
+        auto is_memory_mode = qspi.getIsMemoryMode();
+
+        qspi.exitFromMemoryMode();
+        // Write data
+        for(std::size_t bytes_written = 0; bytes_written < length; bytes_written += PageSize) {
+            if( (bytes_written & SectorSizeMask) == 0 ) {
+                // Erase sector
+                qspi.writeEnable();
+                qspi.eraseSector(address + bytes_written);
+                qspi.waitProgram(0);
+            }
+            // Program bytes
+            auto bytes_remaining = length - bytes_written;
+            if( bytes_remaining < PageSize ) {
+                std::uint8_t page_buffer[PageSize];
+                std::copy(data_ptr + bytes_written, data_ptr + length, page_buffer);
+                std::fill(page_buffer + bytes_remaining, page_buffer + PageSize, 0xff);
+                qspi.writeEnable();
+                qspi.programPage(address + bytes_written, page_buffer, PageSize);
+                qspi.waitProgram(0);
+            }
+            else {
+                qspi.writeEnable();
+                qspi.programPage(address + bytes_written, data_ptr + bytes_written, PageSize);
+                qspi.waitProgram(0);
+            }
+            callback(bytes_written, length, false);
+        }
+        // Verify
+        bool success = true;
+        qspi.enterToMemoryMode();
+        auto qspi_ptr = reinterpret_cast<std::uint8_t*>(0x04000000 + address);
+        for(std::size_t bytes_read = 0; bytes_read < length; bytes_read++, qspi_ptr++, data_ptr++) {
+            if( (bytes_read & (PageSize-1)) == 0 ) {
+                callback(bytes_read, length, true);
+            }
+            if( *qspi_ptr != *data_ptr ) {
+                success = false;
+                break;
+            }
+        }
+
+        if( !is_memory_mode ) {
+            qspi.exitFromMemoryMode();
+        }
+        return success;
+    }
 
     class SerialDownloader
     {
