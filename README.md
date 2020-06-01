@@ -10,6 +10,8 @@ TFカードからロードされるメインアプリケーションには、ボ
 
 付属の `LaunchExtFlash.ino` サンプルスケッチでは、Wio TerminalのボタンA を押した状態でリセットすることにより、メニューアプリを起動します。
 
+[![ExtFlashLoaderの動作](https://img.youtube.com/vi/lPJtOYFQees/0.jpg)](https://www.youtube.com/watch?v=lPJtOYFQees)
+
 ## 使い方
 
 ### メニューアプリの書き込み
@@ -66,6 +68,8 @@ Wio Terminal標準の機能では外部フラッシュに書き込みを行え�
 
 書き込み後、現在は不具合によりアプリケーションを起動できていませんので、電源スイッチをリセット方向にスライドしてリセットをかけてください。
 
+お試し用に [LovyanGFX](https://github.com/lovyan03/LovyanGFX) のサンプルコードをメニュー対応にしたものを用意してあります。[ここからダウンロード出来ます。](https://github.com/ciniml/ExtFlashLoader/releases/download/0.1.0/extflashloader_sample.zip)
+ダウンロードしてZIPファイルを展開し、出てきた `apps` ディレクトリをSDカードのルートに書き込んでください。
 
 ### アプリケーションのメニューアプリ対応
 
