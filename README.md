@@ -1,5 +1,7 @@
 # External Flash Loader library for Wio Terminal
 
+[English page](./README.en.md)
+
 ## 概要
 
 Wio TerminalのATSAMD51に接続されている外部フラッシュメモリに対してアクセスするためのArduino用ライブラリです。
