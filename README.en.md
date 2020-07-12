@@ -14,6 +14,18 @@ The `LaunchExtFlash.ino` sample sketch launches the menu app by resetting the Wi
 
 ## How To Use
 
+### How To Install This Library
+
+Select `ExtFlashLoader` from the library manager of Arduino IDE and install it.
+
+![Library Manager](figure/arduino_library_manager.png)
+
+![ExtFlashLoader](figure/arduino_library_manager_extflashloader.png)
+
+After installing the library completes, the sample sketches of `ExtFlashLoader` is added to the sketch example menu of Arduino IDE.
+
+![Sample Sketch](figure/arduino_sketch_examples_extflashloader.png)
+
 ### Writing the menu app
 
 The menu app must have been written to the external flash to use the menu app.

@@ -16,6 +16,18 @@ TFカードからロードされるメインアプリケーションには、ボ
 
 ## 使い方
 
+### ライブラリのインストール
+
+Arduino IDEのライブラリマネージャから `ExtFlashLoader` を選択してインストールします。
+
+![ライブラリマネージャ](figure/arduino_library_manager.png)
+
+![ExtFlashLoader](figure/arduino_library_manager_extflashloader.png)
+
+インストールが完了すると、スケッチ例に `ExtFlashLoader` のサンプルスケッチが追加されます。
+
+![サンプルスケッチ](figure/arduino_sketch_examples_extflashloader.png)
+
 ### メニューアプリの書き込み
 
 メニューアプリを使うためには、外部フラッシュにメニューアプリを書き込んでおく必要があります。
