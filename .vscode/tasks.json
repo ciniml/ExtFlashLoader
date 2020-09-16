@@ -7,9 +7,20 @@
             "label": "build",
             "type": "shell",
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}/examples/WriteSampleMenu"
             },
-            "command": "${env:HOME}/arduino-cli/bin/arduino-cli compile --optimize-for-debug --fqbn Seeeduino:samd:seeed_wio_terminal --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json",
+            "command": "${env:HOME}/arduino-cli/bin/arduino-cli compile --fqbn Seeeduino:samd:seeed_wio_terminal --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json --libraries ${workspaceFolder}",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "flash",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/examples/WriteSampleMenu"
+            },
+            "command": "${env:HOME}/arduino-cli/bin/arduino-cli upload --fqbn Seeeduino:samd:seeed_wio_terminal --additional-urls https://files.seeedstudio.com/arduino/package_seeeduino_boards_index.json --port /dev/ttyACM0",
             "problemMatcher": [
                 "$gcc"
             ]

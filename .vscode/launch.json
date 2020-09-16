@@ -36,6 +36,39 @@
                 "engineLogging": true
             },
             "preLaunchTask": "build"
+        },
+        {
+            "name": "(gdb) attach",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/sd_updater.Seeeduino.samd.seeed_wio_terminal.elf",
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": true,
+            "targetArchitecture": "arm",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "gdb の再フォーマットを有効にする",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "load symbols",
+                    "text": "symbol-file ${workspaceFolder}/sd_updater.Seeeduino.samd.seeed_wio_terminal.elf"
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "localhost:3333",
+            "miDebuggerArgs": "",
+            "debugServerPath": "${env:HOME}/openocd/bin/openocd",
+            "debugServerArgs": "-s ${env:HOME}/openocd/share/openocd/scripts -f ${workspaceFolder}/openocd.tcl -c \"echo {gdb server started}\"",
+            "serverStarted": "gdb server started",
+            "filterStderr": true,
+            "filterStdout": false,
+            "logging": {
+                "engineLogging": true
+            },
+            "preLaunchTask": "build"
         }
     ]
 }
