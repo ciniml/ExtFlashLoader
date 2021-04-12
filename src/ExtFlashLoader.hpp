@@ -120,6 +120,7 @@ namespace ExtFlashLoader
             }
             else {
                 volatile uint8_t dummy = regs->RXDATA;
+                (void)(dummy);
             }
         }
         void transmitSingleCommand(std::uint8_t command)
@@ -185,7 +186,7 @@ namespace ExtFlashLoader
             transmit(buffer, buffer, 4);
 
             FlashID flashId = {
-                (buffer[2] << 8) | buffer[3],
+                static_cast<std::uint16_t>((buffer[2] << 8) | buffer[3]),
                 buffer[1]
             };
 
@@ -208,13 +209,13 @@ namespace ExtFlashLoader
         static constexpr const std::uint8_t STATUS3 = 0x10;
         std::uint8_t readStatus(std::uint8_t statusReg)
         {
-            std::uint8_t buffer[] = {statusReg | 0x05, 0x00};
+            std::uint8_t buffer[] = {static_cast<std::uint8_t>(statusReg | 0x05), 0x00};
             this->transmit(buffer, buffer, sizeof(buffer));
             return buffer[1];
         }
         void writeStatus(std::uint8_t statusReg, std::uint8_t value)
         {
-            std::uint8_t buffer[] = {statusReg | 0x01, value};
+            std::uint8_t buffer[] = { static_cast<std::uint8_t>(statusReg | 0x01), value};
             this->transmit(buffer, nullptr, sizeof(buffer));
         }
 
@@ -471,7 +472,7 @@ namespace ExtFlashLoader
         {
             switch(this->state) {
                 case State::Idle:
-                    if( Serial.available() >= sizeof(this->command) + 1) {
+                    if( static_cast<size_t>(Serial.available()) >= sizeof(this->command) + 1) {
                         std::uint8_t marker;
                         Serial.readBytes(reinterpret_cast<char*>(&marker), 1);
                         if( marker == HOST_MARKER ) {
